@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback Survey</title>
+<style>
+  :root {
+    --bg: #101418;
+    --panel: #171d24;
+    --field: #0d1116;
+    --text: #e8edf2;
+    --muted: #8b98a5;
+    --accent: #4fd1c5;
+    --border: #2a323c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 520px;
+    width: 100%;
+  }
+  h1 {
+    margin: 0 0 6px;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  p.sub {
+    color: var(--muted);
+    margin: 0 0 28px;
+    line-height: 1.5;
+  }
+  label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .field {
+    margin-bottom: 20px;
+  }
+  input[type="text"],
+  input[type="email"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--field);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.95rem;
+    font-family: inherit;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 90px;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .rating {
+    display: flex;
+    gap: 8px;
+  }
+  .rating label {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+    padding: 10px 0;
+    background: var(--field);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.15s ease;
+  }
+  .rating input {
+    display: none;
+  }
+  .rating input:checked + label {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(79, 209, 197, 0.1);
+  }
+  button {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent);
+    border: none;
+    border-radius: 8px;
+    color: #0d1116;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  button:hover {
+    opacity: 0.9;
+  }
+  .success {
+    display: none;
+    text-align: center;
+  }
+  .success .checkmark {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .success h2 {
+    margin: 0 0 8px;
+    font-size: 1.3rem;
+  }
+  .success p {
+    color: var(--muted);
+    margin: 0;
+  }
+  form.hidden {
+    display: none;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <form id="feedbackForm">
+      <h1>We'd love your feedback</h1>
+      <p class="sub">Takes less than a minute. Let us know how things are going.</p>
+
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+      </div>
+
+      <div class="field">
+        <label>How would you rate your experience?</label>
+        <div class="rating">
+          <input type="radio" id="r1" name="rating" value="1"><label for="r1">1</label>
+          <input type="radio" id="r2" name="rating" value="2"><label for="r2">2</label>
+          <input type="radio" id="r3" name="rating" value="3"><label for="r3">3</label>
+          <input type="radio" id="r4" name="rating" value="4"><label for="r4">4</label>
+          <input type="radio" id="r5" name="rating" value="5"><label for="r5">5</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="category">What's this feedback about?</label>
+        <select id="category" name="category">
+          <option value="general">General</option>
+          <option value="bug">Bug report</option>
+          <option value="feature">Feature request</option>
+          <option value="support">Support experience</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="comments">Comments</label>
+        <textarea id="comments" name="comments" placeholder="Tell us more..."></textarea>
+      </div>
+
+      <button type="submit">Submit Feedback</button>
+    </form>
+
+    <div class="success" id="successMessage">
+      <div class="checkmark">✓</div>
+      <h2>Thanks for your feedback!</h2>
+      <p>We appreciate you taking the time.</p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('feedbackForm');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      // No backend wired up yet — this just simulates a successful submit.
+      // Replace this block with a fetch() call to your API/container endpoint.
+      form.classList.add('hidden');
+      successMessage.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
